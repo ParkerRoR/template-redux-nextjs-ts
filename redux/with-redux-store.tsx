@@ -1,6 +1,9 @@
 import React from 'react'
+import { IRedux_Action } from './interfaces/params'
 
-import { initializeStore, exampleInitialState } from '../domain/store'
+import { redux_initialState } from './mock'
+import { initializeStore } from './store/store'
+
 
 const isServer = typeof window === 'undefined'
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
@@ -27,7 +30,7 @@ const withReduxStore = (Component: React.ComponentClass<Props>) => {
     private reduxStore
 
     static async getInitialProps (appContext) {
-      const reduxStore = getOrCreateStore(exampleInitialState)
+      const reduxStore = getOrCreateStore(redux_initialState)
 
       // Provide the store to getInitialProps of pages
       appContext.ctx.reduxStore = reduxStore
@@ -58,6 +61,6 @@ const withReduxStore = (Component: React.ComponentClass<Props>) => {
 
 export default withReduxStore
 
-export const mapDispatchToProps = dispatch => ({ dispatch })
+export const mapDispatchToProps = (dispatch : (payload : IRedux_Action) => void) => ({ dispatch })
 
 export type Dispatchable<P> = P & ReturnType<typeof mapDispatchToProps>

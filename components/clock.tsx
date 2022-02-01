@@ -1,32 +1,66 @@
-import { connect } from 'react-redux'
 import React from 'react';
-import { State } from '../domain/store';
+import autobind from 'class-autobind'
+import { connect } from 'react-redux';
+import { IRedux_Dispatch } from '../redux/interfaces/dispatch';
+import { IRedux_InitialState } from '../redux/interfaces/initialState';
+import { mapDispatchToProps } from '../redux/with-redux-store';
 
-const mapStateToProps = (state: State) => state
 
-const format = t => `${pad(t.getUTCHours())}:${pad(t.getUTCMinutes())}:${pad(t.getUTCSeconds())}`
+interface ClockProps extends IRedux_Dispatch<IRedux_InitialState> {
 
-const pad = n => n < 10 ? `0${n}` : n
+}
+interface ClockState {
 
-const Clock: React.SFC<State> = ({ lastUpdate, light }) => {
-  return (
-    <div className={light ? 'light' : ''}>
-      {format(new Date(lastUpdate))}
-      <style jsx>{`
-        div {
-          padding: 15px;
-          display: inline-block;
-          color: #82FA58;
-          font: 50px menlo, monaco, monospace;
-          background-color: #000;
-        }
-
-        .light {
-          background-color: #999;
-        }
-      `}</style>
-    </div>
-  )
 }
 
-export default connect<State>(mapStateToProps)(Clock)
+type ClockPayload<T> = {
+  [P in keyof T]?: T[P];
+}
+
+class clock extends React.Component<ClockProps, ClockState> {
+  
+  public state: ClockState = {
+
+  }
+
+  constructor(p: ClockProps) {
+    super(p)
+    autobind(this)
+  }
+
+  public componentDidMount() {
+
+  }
+
+  public UNSAFE_componentWillReceiveProps(props: ClockProps) {
+
+  }
+
+  private handleState(payload: ClockPayload<ClockProps>) {
+    this.setState({
+      ...this.state,
+      ...payload
+    })
+  }
+
+  render() {
+    const { state, props } = this
+    return (
+      <>
+      <button onClick={() => console.log(props)}>logger</button>
+        <button onClick={() => props.dispatch({
+          type:'UPDATE',
+          payload:{
+            teste:1
+          }
+        })}>
+          change!
+        </button>
+      </>
+    );
+  }
+}
+
+const mapStateToProps = (state: IRedux_InitialState) => state
+
+export const Clock = connect<IRedux_InitialState>(mapStateToProps, mapDispatchToProps)(clock)

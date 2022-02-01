@@ -7,6 +7,12 @@ It is based on...
 
 - [next-js-with-typescript-redux](https://github.com/fsubal/next-js-with-typescript-redux)
 
+
+### change repo
+```
+git remote set-url origin https://some_url/some_repo
+```
+
 ### setup
 
 ```

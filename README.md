@@ -1,4 +1,4 @@
-# next-js-with-typescript-redux
+# nextjs + typescript + redux
 
 Application Template for next.js + TypeScript + react-redux (2022)
 

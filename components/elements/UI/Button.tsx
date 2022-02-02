@@ -1,23 +1,23 @@
 import React, { ReactElement } from 'react';
 import autobind from 'class-autobind'
 import Button, { ButtonProps } from '@mui/material/Button';
-interface ButtonElementProps extends ButtonProps {
+interface ButtonEProps extends ButtonProps {
 
 }
 
-interface ButtonElementState {
+interface ButtonEState {
 
 }
 
-type ButtonElementPayload<T> = {
+type ButtonEPayload<T> = {
     [P in keyof T]?: T[P];
 }
 
 
 
-export class ButtonElement extends React.Component<ButtonElementProps, ButtonElementState> {
+export class ButtonE extends React.Component<ButtonEProps, ButtonEState> {
 
-    constructor(p: ButtonElementProps) {
+    constructor(p: ButtonEProps) {
         super(p)
         autobind(this)
     }

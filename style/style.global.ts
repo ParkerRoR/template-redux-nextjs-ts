@@ -11,6 +11,13 @@ export const theme = createTheme({
 
 
 
+
+export const GlobalStyles = createGlobalStyle`
+    body{
+        background-color:#f2f2f2;
+    }
+`
+
 type IFlexSC =
     IDefaultStyle_Margins &
     IDefaultStyle_Paddings &
@@ -21,13 +28,6 @@ type IFlexSC =
 
 
 
-export const GlobalStyles = createGlobalStyle`
-    body{
-        background-color:#f2f2f2;
-    }
-`
-
-
 export const FlexSC = styled.div<IFlexSC>`
     ${(props: IFlexSC) => {
         return `
@@ -36,6 +36,6 @@ export const FlexSC = styled.div<IFlexSC>`
 
         `
     }};
-    background-color: blue;
 
 `
+
